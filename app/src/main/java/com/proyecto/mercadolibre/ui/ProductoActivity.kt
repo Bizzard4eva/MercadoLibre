@@ -171,7 +171,7 @@ class ProductoActivity : AppCompatActivity() {
         binding.tvNombreP.text = producto.nombre
         binding.tvPrecioP.text = producto.precio.toString()
         binding.tvCalificacionP.text = producto.calificacion.toString()
-        binding.tvDireccionP.text = usuario?.direccion
+        binding.tvDireccion.text = usuario?.direccion
         binding.tvDescripcionP.text = producto.descripcion
 
         if(imagenes.isNotEmpty()) {
