@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".ui.ProductosCategoriaActivity">
+    tools:context=".ui.ProductosFavoritosActivity">
 
     <!-- Header con búsqueda -->
     <LinearLayout
@@ -76,7 +76,7 @@
 
     <!-- Banner de la categoría -->
     <ImageView
-        android:id="@+id/imgBannerPC"
+        android:id="@+id/imgBannerPF"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
@@ -84,7 +84,7 @@
 
     <!-- Título de categoría -->
     <TextView
-        android:id="@+id/tvTitulo"
+        android:id="@+id/tvTituloPF"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Productos [Favoritos]"
