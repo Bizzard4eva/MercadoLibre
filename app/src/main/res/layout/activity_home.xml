@@ -12,66 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Zona amarilla -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="@color/yellow"
-            android:padding="8dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/search_edit_text"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:autofillHints=""
-                    android:background="@drawable/edittext_background"
-                    android:hint="Buscar productos, marcas y más"
-                    android:inputType="text"
-                    android:padding="8dp"
-                    android:textColor="@android:color/black"
-                    android:textColorHint="#888888"
-                    android:textSize="12sp" />
-
-                <Button
-                    android:id="@+id/btBuscarH"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
-                    android:backgroundTint="@color/design_default_color_background"
-                    android:text="Buscar"
-                    android:textColor="@color/black"
-                    android:textSize="12sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="match_parent"
-                    android:src="@drawable/ic_ubicacion" />
-
-                <TextView
-                    android:id="@+id/tvDireccion"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:paddingStart="4dp"
-                    android:text="Envíos a Lima, Perú"
-                    android:textColor="@color/black"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
+        <include layout="@layout/barra_busqueda" />
 
         <!-- Banner -->
         <androidx.viewpager2.widget.ViewPager2
