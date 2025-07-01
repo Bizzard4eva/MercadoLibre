@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.proyecto.mercadolibre.MainActivity
 import com.proyecto.mercadolibre.R
 import com.proyecto.mercadolibre.database.AppDatabase
 import com.proyecto.mercadolibre.database.DatabaseProvider
@@ -44,6 +45,10 @@ class PerfilUsuarioActivity : AppCompatActivity() {
             Util.showToast(this, "No has iniciado sesion.")
             Util.navigateTo(this, LoginActivity::class.java)
             finish()
+        }
+        binding.btCerrarSesionPU.setOnClickListener {
+            Sesion.cerrarSesion()
+            Util.navigateTo(this, MainActivity::class.java)
         }
     }
 }
