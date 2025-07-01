@@ -7,7 +7,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".ui.ProductosCategoriaActivity">
+    tools:context=".ui.ProductosCategoriaActivity"
+    >
+
 
     <!-- Header con búsqueda -->
     <LinearLayout
@@ -102,4 +104,7 @@
         android:padding="8dp"
         android:nestedScrollingEnabled="true"
         tools:listitem="@layout/item_producto_destacado" />
+
+    <!-- ✅ Barra de navegación inferior fija -->
+    <include layout="@layout/layout_barra_inferior" />
 </LinearLayout>

@@ -39,4 +39,7 @@
         android:padding="8dp"
         android:nestedScrollingEnabled="true"
         tools:listitem="@layout/item_producto_destacado" />
+
+    <!-- ✅ Barra de navegación inferior fija -->
+    <include layout="@layout/layout_barra_inferior" />
 </LinearLayout>

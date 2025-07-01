@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.proyecto.mercadolibre.R
 import com.proyecto.mercadolibre.adaptadores.BannerAdapter
 import com.proyecto.mercadolibre.adaptadores.CategoriaAdaptador
@@ -74,55 +75,67 @@ class HomeActivity : AppCompatActivity() {
             }
         }, 1000, 3000)
 
-        // ✅ Productos Aleatorios desde BD local (AHORA EN VERTICAL)
+        // ✅ Productos Aleatorios
         Thread {
             val db = DatabaseProvider.getDatabase(this)
-            val productos: List<Producto> = db.productoDAO().listarProductosAleatorios()
-                .take(3) //  Limitamos a 3 productos
-
+            val productos = db.productoDAO().listarProductosAleatorios().take(3)
             val urls = productos.map {
-                val imagenes = db.imagenProductoDAO().listarUrlsImagenesDeProducto(it.idProducto)
-                imagenes.firstOrNull() ?: ""
+                db.imagenProductoDAO().listarUrlsImagenesDeProducto(it.idProducto).firstOrNull() ?: ""
             }
 
             runOnUiThread {
                 val recyclerProductos = findViewById<RecyclerView>(R.id.recycler_productos_destacados)
                 recyclerProductos.layoutManager = LinearLayoutManager(this)
-
-                val adaptador = ProductoAdaptador(productos, urls) { producto ->
+                recyclerProductos.adapter = ProductoAdaptador(productos, urls) { producto ->
                     val intent = Intent(this, ProductoActivity::class.java)
                     intent.putExtra("idProducto", producto.idProducto)
                     startActivity(intent)
                 }
-
-                recyclerProductos.adapter = adaptador
             }
         }.start()
 
-        // ✅ Productos más vendidos desde BD local
+        // ✅ Más Vendidos
         Thread {
             val db = DatabaseProvider.getDatabase(this)
-            val masVendidos: List<Producto> = db.productoDAO().listarProductosAleatorios()
-                .take(3) // ← Limita también si quieres
-
+            val masVendidos = db.productoDAO().listarProductosAleatorios().take(3)
             val urlsMasVendidos = masVendidos.map {
-                val imagenes = db.imagenProductoDAO().listarUrlsImagenesDeProducto(it.idProducto)
-                imagenes.firstOrNull() ?: ""
+                db.imagenProductoDAO().listarUrlsImagenesDeProducto(it.idProducto).firstOrNull() ?: ""
             }
 
             runOnUiThread {
                 val recyclerMasVendidos = findViewById<RecyclerView>(R.id.recycler_productos_mas_vendidos)
                 recyclerMasVendidos.layoutManager = LinearLayoutManager(this)
-
-                val adaptadorMasVendidos = ProductoAdaptador(masVendidos, urlsMasVendidos) { producto ->
+                recyclerMasVendidos.adapter = ProductoAdaptador(masVendidos, urlsMasVendidos) { producto ->
                     val intent = Intent(this, ProductoActivity::class.java)
                     intent.putExtra("idProducto", producto.idProducto)
                     startActivity(intent)
                 }
-
-                recyclerMasVendidos.adapter = adaptadorMasVendidos
             }
         }.start()
+
+        // ✅ Barra inferior (BottomNavigationView)
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> true // Ya estás en esta pantalla
+                R.id.nav_favoritos -> {
+                    startActivity(Intent(this, ProductosFavoritosActivity::class.java))
+                    true
+                }
+                R.id.nav_registrar -> {
+                    startActivity(Intent(this, RegistrarProductoActivity::class.java))
+                    true
+                }
+                R.id.nav_perfil -> {
+                    startActivity(Intent(this, PerfilUsuarioActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
+        // Marcar "Inicio" como seleccionado
+        bottomNavigation.selectedItemId = R.id.nav_home
     }
 
     override fun onDestroy() {

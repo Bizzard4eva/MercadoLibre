@@ -8,6 +8,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.proyecto.mercadolibre.R
 import com.proyecto.mercadolibre.adaptadores.ProductoAdaptador
 import com.proyecto.mercadolibre.database.AppDatabase
@@ -73,6 +74,31 @@ class ProductosFavoritosActivity : AppCompatActivity() {
                 binding.recyclerViewPF.layoutManager = LinearLayoutManager(this)
             }
         }.start()
+
+        val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.nav_home -> {
+                    startActivity(Intent(this, HomeActivity::class.java))
+                    true
+                }
+                R.id.nav_favoritos -> {
+                    startActivity(Intent(this, ProductosFavoritosActivity::class.java))
+                    true
+                }
+                R.id.nav_registrar -> {
+                    startActivity(Intent(this, RegistrarProductoActivity::class.java))
+                    true
+                }
+                R.id.nav_perfil -> {
+                    startActivity(Intent(this, PerfilUsuarioActivity::class.java))
+                    true
+                }
+                else -> false
+            }
+        }
+
 
     }
 }
